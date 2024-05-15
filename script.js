@@ -17,25 +17,29 @@ const winConditions = [
   [2, 4, 6]
 ];
 
-function handleCellClick(clickedCellEvent) {
+function handleCellClick(clickedCellEvent)
+{
   const clickedCell = clickedCellEvent.target;
   const clickedCellIndex = parseInt(clickedCell.getAttribute('data-cell-index'));
 
-  if (gameState[clickedCellIndex] !== '' || !gameActive) {
+  if (gameState[clickedCellIndex] !== '' || !gameActive)
+  {
     return;
   }
 
   gameState[clickedCellIndex] = currentPlayer;
   clickedCell.textContent = currentPlayer;
 
-  if (checkWin()) {
+  if (checkWin())
+  {
     status.textContent = `Player ${currentPlayer} wins!`;
     status.classList.add('win-message');
     gameActive = false;
     return;
   }
 
-  if (checkDraw()) {
+  if (checkDraw())
+  {
     status.textContent = `It's a draw!`;
     status.classList.add('tie-message');
     gameActive = false;
@@ -46,7 +50,8 @@ function handleCellClick(clickedCellEvent) {
   status.textContent = `Player ${currentPlayer}'s turn`;
 }
 
-function checkWin() {
+function checkWin()
+{
   return winConditions.some(condition => {
     return condition.every(index => {
       return gameState[index] === currentPlayer;
@@ -54,13 +59,15 @@ function checkWin() {
   });
 }
 
-function checkDraw() {
+function checkDraw()
+{
   return gameState.every(cell => {
     return cell !== '';
   });
 }
 
-function handleRestart() {
+function handleRestart()
+{
   currentPlayer = 'X';
   gameActive = true;
   gameState = ['', '', '', '', '', '', '', '', ''];
